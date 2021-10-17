@@ -1,0 +1,77 @@
+;
+; PythonDriverComm.inf
+;
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=System ; TODO: specify appropriate Class
+ClassGuid={4d36e97d-e325-11ce-bfc1-08002be10318} ; TODO: specify appropriate ClassGuid
+Provider=%ManufacturerName%
+CatalogFile=PythonDriverComm.cat
+DriverVer= ; TODO: set DriverVer in stampinf property pages
+PnpLockdown=1
+
+[DestinationDirs]
+DefaultDestDir = 12
+PythonDriverComm_Device_CoInstaller_CopyFiles = 11
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+PythonDriverComm.sys  = 1,,
+WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll=1 ; make sure the number matches with SourceDisksNames
+
+;*****************************************
+; Install Section
+;*****************************************
+
+[Manufacturer]
+%ManufacturerName%=Standard,NT$ARCH$
+
+[Standard.NT$ARCH$]
+%PythonDriverComm.DeviceDesc%=PythonDriverComm_Device, Root\PythonDriverComm ; TODO: edit hw-id
+
+[PythonDriverComm_Device.NT]
+CopyFiles=Drivers_Dir
+
+[Drivers_Dir]
+PythonDriverComm.sys
+
+;-------------- Service installation
+[PythonDriverComm_Device.NT.Services]
+AddService = PythonDriverComm,%SPSVCINST_ASSOCSERVICE%, PythonDriverComm_Service_Inst
+
+; -------------- PythonDriverComm driver install sections
+[PythonDriverComm_Service_Inst]
+DisplayName    = %PythonDriverComm.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\PythonDriverComm.sys
+
+;
+;--- PythonDriverComm_Device Coinstaller installation ------
+;
+
+[PythonDriverComm_Device.NT.CoInstallers]
+AddReg=PythonDriverComm_Device_CoInstaller_AddReg
+CopyFiles=PythonDriverComm_Device_CoInstaller_CopyFiles
+
+[PythonDriverComm_Device_CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000, "WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll,WdfCoInstaller"
+
+[PythonDriverComm_Device_CoInstaller_CopyFiles]
+WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll
+
+[PythonDriverComm_Device.NT.Wdf]
+KmdfService =  PythonDriverComm, PythonDriverComm_wdfsect
+[PythonDriverComm_wdfsect]
+KmdfLibraryVersion = $KMDFVERSION$
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+ManufacturerName="<Your manufacturer name>" ;TODO: Replace with your manufacturer name
+DiskName = "PythonDriverComm Installation Disk"
+PythonDriverComm.DeviceDesc = "PythonDriverComm Device"
+PythonDriverComm.SVCDESC = "PythonDriverComm Service"

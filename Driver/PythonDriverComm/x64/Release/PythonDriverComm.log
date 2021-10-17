@@ -1,0 +1,23 @@
+﻿  Building 'PythonDriverComm' with toolset 'WindowsKernelModeDriver10.0' and the 'Universal' target platform.
+  Stamping x64\Release\PythonDriverComm.inf
+  Stamping [Version] section with DriverVer=09/25/2021,21.4.21.298
+  driver.cpp
+  PythonDriverComm.vcxproj -> C:\Users\dynam\Game Reversal\KernelDriverPythonComm\Driver\x64\Release\PythonDriverComm.sys
+  Done Adding Additional Store
+  Successfully signed: C:\Users\dynam\Game Reversal\KernelDriverPythonComm\Driver\x64\Release\PythonDriverComm.sys
+  
+  Driver is 'Universal'.
+  .........................
+  Signability test complete.
+  
+  Errors:
+  None
+  
+  Warnings:
+  None
+  
+  Catalog generation complete.
+  C:\Users\dynam\Game Reversal\KernelDriverPythonComm\Driver\x64\Release\PythonDriverComm\pythondrivercomm.cat
+  Done Adding Additional Store
+  Successfully signed: C:\Users\dynam\Game Reversal\KernelDriverPythonComm\Driver\x64\Release\PythonDriverComm\pythondrivercomm.cat
+  

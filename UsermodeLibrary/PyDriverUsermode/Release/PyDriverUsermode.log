@@ -1,0 +1,6 @@
+﻿  main.cpp
+  The contents of <string_view> are available only with C++17 or later.
+C:\Users\dynam\Game Reversal\KernelDriverPythonComm\UsermodeLibrary\PyDriverUsermode\PyDriverUsermode\pyDriver.h(39,24): warning C4244: 'argument': conversion from 'float' to 'ULONG64', possible loss of data
+     Creating library C:\Users\dynam\Game Reversal\KernelDriverPythonComm\UsermodeLibrary\PyDriverUsermode\Release\PyDriverUsermode.lib and object C:\Users\dynam\Game Reversal\KernelDriverPythonComm\UsermodeLibrary\PyDriverUsermode\Release\PyDriverUsermode.exp
+MSVCRT.lib(exe_main.obj) : error LNK2001: unresolved external symbol _main
+C:\Users\dynam\Game Reversal\KernelDriverPythonComm\UsermodeLibrary\PyDriverUsermode\Release\PyDriverUsermode.exe : fatal error LNK1120: 1 unresolved externals
