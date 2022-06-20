@@ -10,21 +10,10 @@ namespace hook {
 			m->pid = memory::get_process_id(m->process_name);
 		}
 		if (m->base) {
-			PEPROCESS process = NULL;
-			if (NT_SUCCESS(PsLookupProcessByProcessId(m->pid, &process))) {
-				if (m->pid == memory::get_process_id("csgo.exe")) { //For x86 Processes
-
-					KAPC_STATE apc;
-					KeStackAttachProcess(process, &apc);
-
-					LONG b = memory::get_module_base_x86(process, L"client.dll");
-					KeUnstackDetachProcess(&apc);
-					if (b) { m->buffer = reinterpret_cast<PVOID>(b); }
-				}
-				else {
-					m->buffer = (PVOID)memory::get_module_base_x64(process);
-				}
-			}
+			PEPROCESS process = { 0 };
+			PsLookupProcessByProcessId((HANDLE)m->pid, &process);
+			m->buffer = PsGetProcessSectionBaseAddress(process);
+			ObDereferenceObject(process);
 		}
 		else if (m->peb) {
 			PEPROCESS process = NULL;
